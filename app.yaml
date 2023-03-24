@@ -1,0 +1,15 @@
+service: user-service
+runtime: nodejs12
+inbound_services:
+- warmup
+automatic_scaling:
+  target_cpu_utilization: 0.70
+  max_instances: 2
+  min_pending_latency: 40ms
+  max_pending_latency: automatic
+  max_concurrent_requests: 50
+handlers:
+- url: /.*
+  script: auto
+  secure: always
+  redirect_http_response_code: 301
